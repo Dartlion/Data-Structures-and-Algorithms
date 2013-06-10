@@ -52,9 +52,10 @@ int GenPartialMatchTable(const string &src, vector<int> &v)
  * @ret : the number of match times
  *
  * @ref : http://www.ruanyifeng.com/blog/2013/05 */
-int Kmp(string &src, string &mode, vector<int> vec)
+int Kmp(string &src, string &mode)
 {
 	string CmpString;
+	vector<int> vec;
 	size_t srcLen = src.size();
 	size_t modeLen = mode.size();
 	size_t cnt = 0;
@@ -64,6 +65,9 @@ int Kmp(string &src, string &mode, vector<int> vec)
 	{
 		return cnt;
 	}
+	
+	GenPartialMatchTable(mode, vec);
+
 	while(idx <= srcLen - modeLen)
 	{
 		CmpString = src.substr(idx,modeLen);
@@ -103,17 +107,8 @@ int main()
 {
 	string src = "BBC ABCDAB ABCDABCDABDE";
 	string mode = "ABCDABD";
-	vector<int> vec;
 
-	GenPartialMatchTable(mode, vec);
-
-	for(size_t i=0; i<vec.size(); ++i)
-	{
-		cout<<vec[i]<<" ";
-	}
-	cout<<endl;
-
-    size_t matchCnt = Kmp(src, mode, vec);
+    size_t matchCnt = Kmp(src, mode);
 
 	cout<<"match count: "<< matchCnt <<endl;
 
