@@ -1,3 +1,5 @@
+#ifndef VECTOR_H
+#define VECTOR_H
 
 #include <stddef.h>
 template <typename Object>
@@ -99,3 +101,6 @@ class Vector
 		int theCapacity;
 		Object *objects;
 };
+
+#endif
+
